@@ -1,0 +1,26 @@
+{
+  "name": "create-viperhtml-app",
+  "version": "0.0.0",
+  "description": "A basic viperHTML + hyperHTML setup",
+  "scripts": {
+    "build": "mkdir -p cdn; rm -f cdn/{manifest,sw}.*; npm run bundle",
+    "bundle": "webpack --verbose",
+    "start": "node ./viper/server/index.js",
+    "postinstall": "npm run build"
+  },
+  "author": "Andrea Giammarchi",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-builtin-classes": "^0.2.2",
+    "babel-preset-env": "^1.5.2",
+    "webpack": "^3.0.0"
+  },
+  "dependencies": {
+    "hyperhtml": "^0.14.0",
+    "tiny-cdn": "^0.7.0",
+    "viperhtml": "^0.9.0"
+  }
+}
