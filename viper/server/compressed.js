@@ -5,31 +5,27 @@ class Compressed {
 
   constructor(request, response, headers) {
     const acceptEncoding = request.headers['accept-encoding'];
-    this.noHeaders = true;
-    this.headers = Object.assign({}, headers);
-    this.response = response;
+    const headers = Object.assign({}, headers);
     switch (true) {
       case /\bdeflate\b/.test(acceptEncoding):
-        this.headers['Content-Encoding'] = 'deflate';
+        headers['Content-Encoding'] = 'deflate';
         this.output = zlib.createDeflate();
         this.output.pipe(response);
         break;
       case /\bgzip\b/.test(acceptEncoding):
-        this.headers['Content-Encoding'] = 'gzip';
+        headers['Content-Encoding'] = 'gzip';
         this.output = zlib.createGzip();
         this.output.pipe(response);
         break;
       default:
-        this.output = this.response;
+        this.output = response;
         break;
     }
+    this.response = response;
+    this.response.writeHead(200, headers);
   }
 
   write(chunks) {
-    if (this.noHeaders) {
-      this.noHeaders = false;
-      this.response.writeHead(200, this.headers);
-    }
     this.output.write(chunks);
   }
 
@@ -44,5 +40,5 @@ class Compressed {
 }
 
 module.exports = (request, response, headers) => {
-  return new Compressed(request, response);
+  return new Compressed(request, response, headers);
 };
