@@ -1,4 +1,6 @@
 .DS_Store
 cdn/
 node_modules/
+js/
+sw.js
 viper/stats.json

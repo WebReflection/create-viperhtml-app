@@ -9,14 +9,14 @@ module.exports = (render, model) => render`
       <meta name="apple-mobile-web-app-capable" content="yes">
       <meta name="mobile-web-app-capable" content="yes">
       <meta name="theme-color" content="#ffffff">
-      <style>${model.style}</style>
       <link rel="manifest" href="/manifest.json">
       <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
       <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
       <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
       <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-      <script defer>(navigator.serviceWorker||{register:String}).register('${model.sw}')</script>
-      <script src="${model.script}" defer></script>
+      <style>${model.style}</style>
+      <script>(navigator.serviceWorker||{register:String}).register('${model.sw}')</script>
+      <script defer src="${model.script}"></script>
     </head>
     <body>${model.body}</body>
   </html>
