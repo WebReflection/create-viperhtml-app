@@ -5,7 +5,7 @@ class Compressed {
 
   constructor(request, response, headers) {
     const acceptEncoding = request.headers['accept-encoding'];
-    const headers = Object.assign({}, headers);
+    headers = Object.assign({}, headers);
     switch (true) {
       case /\bdeflate\b/.test(acceptEncoding):
         headers['Content-Encoding'] = 'deflate';
