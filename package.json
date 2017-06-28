@@ -1,6 +1,6 @@
 {
   "name": "create-viperhtml-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A basic viperHTML + hyperHTML setup",
   "scripts": {
     "build": "mkdir -p cdn; rm -f cdn/{manifest,sw}.*; npm run bundle",
