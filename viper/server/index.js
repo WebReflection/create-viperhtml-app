@@ -38,11 +38,11 @@ require('http')
         language: 'en',
         script: `${stats.publicPath}/${stats.assets[0].name}`,
         sw: `/sw.js`,
-        style: `
+        style: viperHTML.minify.css(`
           html {
             font-family: sans-serif;
             text-align: center;
-          }`,
+          }`),
         body: [
           // the order is preserved, no matter when async chunks get resolved
           new Promise(res => setTimeout(res, 100, '<h1>')),
