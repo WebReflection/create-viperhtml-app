@@ -19,8 +19,8 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
-    "hyperhtml": "^0.15.1",
+    "hyperhtml": "^0.15.2",
     "tiny-cdn": "^0.7.0",
-    "viperhtml": "^0.9.1"
+    "viperhtml": "^0.9.2"
   }
 }
