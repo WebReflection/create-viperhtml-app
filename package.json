@@ -6,6 +6,7 @@
     "build": "mkdir -p cdn; rm -f cdn/{manifest,sw}.*; npm run bundle",
     "bundle": "webpack --verbose",
     "start": "node ./viper/server/index.js",
+    "watch": "npm run build && (webpack-build -w -c ./webpack.config.js & nodemon --watch viper --ignore 'viper/client' --ignore 'viper/stats.json' ./viper/server/index.js)",
     "postinstall": "npm run build"
   },
   "author": "Andrea Giammarchi",
@@ -16,7 +17,9 @@
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-builtin-classes": "^0.2.2",
     "babel-preset-env": "^1.5.2",
-    "webpack": "^3.0.0"
+    "nodemon": "^1.11.0",
+    "webpack": "^3.0.0",
+    "webpack-build": "^1.0.1"
   },
   "dependencies": {
     "hyperhtml": "^0.15.2",
