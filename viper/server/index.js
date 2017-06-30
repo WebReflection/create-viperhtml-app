@@ -2,11 +2,13 @@
 const viperHTML = require('viperhtml');
 
 
+
 // local modules
 const cdn = require('./cdn.js');
 const compressed = require('./compressed');
 const indexPage = require('../view/index.js');
 const stats = require('../stats.json');
+
 
 
 // local variables
@@ -17,6 +19,13 @@ const through = viperHTML.async();
 
 // which asset should be served as static?
 const STATIC_ASSET = /^\/(?:js\/|css\/|img\/|assets\/|favicon\.ico|manifest.json|sw.js)/;
+
+// which bundle file?
+const BUNDLE = stats.assets.find(asset => asset.name === 'bundle.js');
+
+// is this a PWA ? If the file client/sw.js exists we assume it is
+const IS_PWA = require('fs').existsSync('../client/sw.js');
+
 
 
 // App
@@ -36,8 +45,8 @@ require('http')
       {
         title: 'viperHTML',
         language: 'en',
-        script: `${stats.publicPath}/${stats.assets[0].name}`,
-        sw: `/sw.js`,
+        script: `${stats.publicPath}/${BUNDLE.name}`,
+        isPWA: IS_PWA,
         style: viperHTML.minify.css(`
           html {
             font-family: sans-serif;

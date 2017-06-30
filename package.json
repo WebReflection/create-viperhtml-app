@@ -5,9 +5,13 @@
   "scripts": {
     "build": "mkdir -p cdn; rm -f cdn/{manifest,sw}.*; npm run bundle",
     "bundle": "webpack --verbose",
+    "postinstall": "npm run build",
     "start": "node ./viper/server/index.js",
-    "watch": "npm run build && (webpack-build -w -c ./webpack.config.js & nodemon --watch viper --ignore 'viper/client' --ignore 'viper/stats.json' ./viper/server/index.js)",
-    "postinstall": "npm run build"
+    "template-to-view": "for f in $(ls viper/template/*.html);do f=\"$(basename $f)\";f=\"viper/view/${f:0:$((${#f}-5))}\";echo 'module.exports = (render, model) => render`'>\"$f.js\";cat \"viper/template/$(basename $f).html\">>\"$f.js\";echo '`;'>>\"$f.js\"; done",
+    "watch": "npm run build && (npm run watch-template & npm run watch-client & npm run watch-server)",
+    "watch-client": "webpack-build -d -w -c ./webpack.config.js",
+    "watch-server": "nodemon --watch viper --ignore 'viper/client' --ignore 'viper/template' --ignore 'viper/stats.json' ./viper/server/index.js",
+    "watch-template": "nodemon --ext html --exec 'npm run' --watch viper/template template-to-view"
   },
   "author": "Andrea Giammarchi",
   "license": "ISC",
@@ -24,6 +28,6 @@
   "dependencies": {
     "hyperhtml": "^0.15.2",
     "tiny-cdn": "^0.7.0",
-    "viperhtml": "^0.10.0"
+    "viperhtml": "^0.10.1"
   }
 }

@@ -15,7 +15,10 @@ module.exports = (render, model) => render`
       <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
       <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
       <style>${model.style}</style>
-      <script>(navigator.serviceWorker||{register:String}).register('${model.sw}')</script>
+      <script>${model.isPWA ?
+        `(navigator.serviceWorker||{register:String}).register('/sw.js')` :
+        ''
+      }</script>
       <script defer src="${model.script}"></script>
     </head>
     <body>${model.body}</body>
