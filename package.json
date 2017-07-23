@@ -1,6 +1,6 @@
 {
   "name": "create-viperhtml-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A basic viperHTML + hyperHTML setup",
   "scripts": {
     "build": "npm run purge && npm run bundle",
