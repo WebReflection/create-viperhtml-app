@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const join = require('path').join;
 const fs = require('fs');
 const console = require('consolemd');
-// const crypto = require('crypto');
 let lastHash = '';
 
 module.exports = env => ({
@@ -39,31 +38,29 @@ module.exports = env => ({
             JSON.stringify(json, null, '  '),
             err => {
               if (err) console.error(' #red(✘) unable to write stats.json');
-              else {
-                Promise.all(
-                  json.entrypoints.sw.assets.map(file => new Promise((res, rej) => {
-                    fs.readFile(
-                      join(__dirname, 'public', 'js', json.hash + '.wp', file),
-                      (err, data) => err ? rej(err) : res(data)
-                    );
-                  }))
-                )
-                .catch(err => console.error(' #red(✘) unable to generate sw.js'))
-                .then(files => {
-                  const content = files.join('\n');
-                  fs.writeFile(
-                    join(__dirname, 'public', 'sw.js'),
-                    `const Bundle=${JSON.stringify({
-                      assets: json.entrypoints.bundle.assets,
-                      hash: json.hash // crypto.createHash('md5').update(content).digest('hex')
-                    })};\n${content}`,
-                    err => {
-                      if (err) console.error(' #red(✘) unable to generate sw.js')
-                      else console.info(' #green(✔) new */sw.js* available');
-                    }
+              else Promise.all(
+                json.entrypoints.sw.assets.map(file => new Promise((res, rej) => {
+                  fs.readFile(
+                    join(__dirname, 'public', 'js', json.hash + '.wp', file),
+                    (err, data) => err ? rej(err) : res(data)
                   );
-                });
-              }
+                }))
+              )
+              .catch(err => console.error(' #red(✘) unable to generate sw.js'))
+              .then(files => {
+                const content = files.join('\n');
+                fs.writeFile(
+                  join(__dirname, 'public', 'sw.js'),
+                  `const Bundle=${JSON.stringify({
+                    assets: json.entrypoints.bundle.assets,
+                    hash: json.hash
+                  })};\n${content}`,
+                  err => {
+                    if (err) console.error(' #red(✘) unable to generate sw.js')
+                    else console.info(' #green(✔) new */sw.js* available');
+                  }
+                );
+              });
             }
           ); 
         }
