@@ -1,27 +1,21 @@
-// this file will contain a reference to all
-// bundled files which is the APPLICATION_BUNDLE array.
+// this file will contain a reference
+// to a top level Bundle constant
+// which is an object with at least two properties:
+// Bundle.assets, an Array with all bundled assets
+// Bundle.hash, the unique hash of all asssets (content)
 
-// You can use this array to cache em all
-// or just the first bundle file.
+// You can use this reference to cache all files
+// or just the first bundled file.
 
 // You can also use such bundle to grant a unique
 // cache on your Service Worker storage.
 
-const openCache = caches.open(
-  'cache:' + hashCode(APPLICATION_BUNDLE.join('$'))
-);
-
-const any = $ => new Promise((D, E, A, L) => {
-  A = [];
-  L = $.map(($, i) => Promise
-      .resolve($)
-      .then(D, O => (((A[i] = O), --L) || E(A)))
-  ).length;
-});
-
+const openCache = caches.open(Bundle.hash);
 addEventListener('install', e => {
+  // all JS files plus the site root
+  const assets = Bundle.assets.concat('/');
   e.waitUntil(openCache.then(
-    cache => cache.addAll(APPLICATION_BUNDLE)
+    cache => cache.addAll(assets)
   ));
 });
 
@@ -44,14 +38,12 @@ addEventListener('fetch', e => {
   );
 });
 
-function hashCode(str) {
-  for (var
-    length = str.length,
-    hash = 31,
-    i = 0; i < length; i++
-  ) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    hash = hash & hash;
-  }
-  return hash;
-}
+// simple utility to resolve whatever comes first
+// or reject if all of them fails
+const any = $ => new Promise((D, E, A, L) => {
+  A = [];
+  L = $.map(($, i) => Promise
+      .resolve($)
+      .then(D, O => (((A[i] = O), --L) || E(A)))
+  ).length;
+});
