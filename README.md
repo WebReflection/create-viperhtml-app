@@ -1,4 +1,4 @@
-# create-viperhtml-app
+# create-viperhtml-app [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/WebReflection/donate)
 
 A basic [viperHTML](https://github.com/WebReflection/viperHTML) + [hyperHTML](https://github.com/WebReflection/hyperHTML) setup based on [Webpack](https://webpack.js.org/) and with native subclassing capabilities, including Custom Elements.
 
