@@ -7,14 +7,14 @@ class Compressed {
     const acceptEncoding = request.headers['accept-encoding'];
     headers = Object.assign({}, headers);
     switch (true) {
-      case /\bdeflate\b/.test(acceptEncoding):
-        headers['Content-Encoding'] = 'deflate';
-        this.output = zlib.createDeflate();
-        this.output.pipe(response);
-        break;
       case /\bgzip\b/.test(acceptEncoding):
         headers['Content-Encoding'] = 'gzip';
         this.output = zlib.createGzip();
+        this.output.pipe(response);
+        break;
+      case /\bdeflate\b/.test(acceptEncoding):
+        headers['Content-Encoding'] = 'deflate';
+        this.output = zlib.createDeflate();
         this.output.pipe(response);
         break;
       default:

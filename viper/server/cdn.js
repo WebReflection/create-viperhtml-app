@@ -1,4 +1,4 @@
-const {join, resolve} = require('path');
+const {join} = require('path');
 const tinyCDN = require('tiny-cdn');
 module.exports = tinyCDN({
   // where to find source files

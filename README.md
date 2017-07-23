@@ -21,6 +21,11 @@ To test the example page, just run the usual `npm start`.
   * **viper** is where the actual app code is defined, it has at least these subfolders: **client**, for the browser related client-side code, **server**, for the HTTP based back-end service, and **view**, for the external files used either on the client, on the server, or in both, to generate the whole page, or partial content
 
 
+#### Extra Details
+
+You can surf each folder inside [./viper](./viper/) one to know more about each role.
+
+
 #### F.A.Q.
 
   * can I use _express_ or others? Sure you can, this is just a basic setup.

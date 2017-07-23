@@ -1,4 +1,16 @@
-const openCache = caches.open('#[viper-news]');
+// this file will contain a reference to all
+// bundled files which is the APPLICATION_BUNDLE array.
+
+// You can use this array to cache em all
+// or just the first bundle file.
+
+// You can also use such bundle to grant a unique
+// cache on your Service Worker storage.
+
+const openCache = caches.open(
+  'cache:' + hashCode(APPLICATION_BUNDLE.join('$'))
+);
+
 const any = $ => new Promise((D, E, A, L) => {
   A = [];
   L = $.map(($, i) => Promise
@@ -7,13 +19,13 @@ const any = $ => new Promise((D, E, A, L) => {
   ).length;
 });
 
-self.addEventListener('install', e => {
-  e.waitUntil(
-    openCache.then(cache => cache.addAll([]))
-  );
+addEventListener('install', e => {
+  e.waitUntil(openCache.then(
+    cache => cache.addAll(APPLICATION_BUNDLE)
+  ));
 });
 
-self.addEventListener('fetch', e => {
+addEventListener('fetch', e => {
   const request = e.request;
   e.respondWith(
     openCache.then(cache => cache.match(request).then(
@@ -31,3 +43,15 @@ self.addEventListener('fetch', e => {
     ))
   );
 });
+
+function hashCode(str) {
+  for (var
+    length = str.length,
+    hash = 31,
+    i = 0; i < length; i++
+  ) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return hash;
+}
