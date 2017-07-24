@@ -1785,8 +1785,8 @@ https-browserify@0.0.1:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
 
 hyperhtml@^0.15.8:
-  version "0.15.8"
-  resolved "https://registry.yarnpkg.com/hyperhtml/-/hyperhtml-0.15.8.tgz#4eda6803b9d7918c5412409c3eaf9dbeb043d343"
+  version "0.15.9"
+  resolved "https://registry.yarnpkg.com/hyperhtml/-/hyperhtml-0.15.9.tgz#7ade3761512598fff4b4a5ec4d84a86153032eb0"
 
 iconv-lite@0.4.15:
   version "0.4.15"
@@ -3336,8 +3336,8 @@ verror@1.3.6:
     extsprintf "1.0.2"
 
 viperhtml@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/viperhtml/-/viperhtml-0.10.2.tgz#c7db51d84710596e4a6285a0ca2bbdab367e9857"
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/viperhtml/-/viperhtml-0.10.3.tgz#79f52249f721821060347601a0ff51aaf111d280"
   dependencies:
     csso "^3.1.1"
     html-escaper "^1.0.1"
