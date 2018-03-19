@@ -1,4 +1,4 @@
-const hyperHTML = require('hyperhtml');
+const hyperHTML = require('hyperhtml/cjs').default;
 
 const uaInfo = require('../view/ua-info.js');
 
